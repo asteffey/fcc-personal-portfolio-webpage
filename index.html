@@ -5,25 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>apsteffey's Portfolio</title>
     <style>
+        @import url('https://fonts.googleapis.com/css?family=Lato|Montserrat|Open+Sans');
+
         :root {
             --top-header-height: 50px;
             --top-padding: calc(var(--top-header-height) + 10px);
+            --top-name-width: 200px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        #name {
+            text-align: right;
+            width: var(--top-name-width);
+            line-height: var(--top-header-height);
+            padding-right: 25px;
+            box-sizing: border-box;
+            font-family: 'Lato', sans-serif;
+        }
+
+        #name a {
+            text-decoration: none;
+            color: white;
         }
 
         body {
             margin: 0;
         }
 
-        #welcome-section, #projects, #contact {
-            height: 100vh;
-            padding-top: var(--top-padding);
+        body > section {
+            /*min-height: 100vh;*/
+            /*padding-top: var(--top-padding); freecodecamp test doesn't like this*/
         }
 
-        #top-header, #navbar {
+        body > section > h1 {
+            text-align: center;
+            font-family: 'Lato', sans-serif;
+        }
+
+        body > section > h1:first-child {
+            padding-top: var(--top-padding);
+            margin-top: 0;
+        }
+
+        #welcome-section, #contact {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #welcome-section {
+            background-color: #eef;
+        }
+
+        #who-i-am {
+            height: 200px;
+            text-align: center;
+            vertical-align: middle;
+            font-family: 'Lato', sans-serif;
+        }
+
+        #who-i-am h1 {
+            margin: 0;
+            font-size: 3em;
+            color: #113;
+        }
+
+        #who-i-am h2 {
+            margin: 0;
+            font-size: 1.75em;
+            color: #335;
+        }
+
+        #who-i-am h3 {
+            margin: 0;
+            font-size: 0.9em;
+            border-top: 1px solid #668;
+            border-bottom: 1px solid #668;
+            line-height: 1.2em;
+            color: #668;
+        }
+
+        #navbar, #navbar nav {
             box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
         }
         
-        #top-header {
+        #navbar {
             position: fixed;
             top: 0;
             left: 0;
@@ -31,60 +98,243 @@
             width: 100%;
             background-color: #333;
             color: #EEF;
+            display: grid;
+            grid-template-columns: var(--top-name-width) auto;
         }
 
-        #navbar {
+        #nav-button {
+            justify-self: end;
+            align-self: center;
+            margin-right: 8px;
+        }
+
+        #nav {
             position: fixed;
             top: var(--top-header-height);
             left: 0;
             width: 100%;
+            background-color: #393939;
+            visibility: hidden;
+            padding-bottom: 5px;
+            font-family: 'Open Sans', sans-serif;
         }
 
-        #navbar > ul {
+        nav a {
+            font-size: 12pt;
+            color: white;
+            text-decoration: none;
+        }
+
+        #nav a:hover, #nav a.active {
+            color: rgb(227, 27, 60);
+        }
+
+        #navbar nav ul, #navbar ul li {
             display: block;
+            padding: 0;
+            margin: 0;
         }
 
-        #navbar > ul > li {
+        #navbar nav ul li a {
             display: block;
+            padding: 8px 20px 8px 20px;
         }
 
-        
+        .nav-visible {
+            visibility: visible !important;
+        }
 
-        @media (min-width: 5000px) {
-            #navbar {
+        @media (min-width: 550px) {
+            #nav-button {
+                display: none;
+            }
 
+            #navbar nav {
+                position: static;
+                width: 100%;
+                background: none;
+                box-shadow: none;
+                visibility: hidden;
+                justify-self: end;
+                width: 100%;
+                max-width: 500px;
+                visibility: visible;
+                
+            }
+
+            #navbar nav > ul {
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: space-between;
+            }
+
+            #navbar nav ul li a {
+                line-height: var(--top-header-height);
+                padding: 0 15px 0 15px;
+                text-align: center;
             }
         }
 
+        h1{font-size: 3em;}
+        h2{font-size: 1.75em;}
+        h3{font-size: 1.25em;}
+
+        #brand {
+            font-style: italic;
+            text-align: center;
+            font-weight: 600;
+            margin: 0 auto;
+            padding: 0 20px;
+            max-width: 600px;
+
+        }
+
     </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script>
+        $(function() {
+            on_resize();
+            $(window).resize(on_resize);
+
+            on_scroll();
+            $(window).on("scroll", on_scroll);
+
+            $("#nav-button").click(function(e) {
+                $("#nav").toggleClass("nav-visible");
+            });
+
+            $("#nav a").click(on_nav_click);
+        });
+        
+        function on_nav_click(e) {
+            $("#nav").removeClass("nav-visible");
+        }
+        
+        function on_resize() {
+            if ($("#nav-button").is(":hidden")) {
+                $("#nav").removeClass("nav-visible");
+            }
+        }
+        
+        function on_scroll() {
+            var currentPos = $(window).scrollTop();
+            $('#nav a').each(function() {
+                var sectionLink = $(this);
+                // capture the height of the navbar
+                var section = $(sectionLink.attr('href'));
+
+                // subtract the navbar height from the top of the section
+                if(section.offset().top <= currentPos && currentPos < (section.offset().top + section.height())) {
+                    //$('.nav li').removeClass('active');
+                    sectionLink.addClass('active');
+                } else {
+                    sectionLink.removeClass('active');
+                }
+            });
+        }
+
+    </script>
 </head>
 <body>
     <script src="../testable-projects-fcc-v1-bundle.js"></script>
-    <header id="top-header">
-        <div id="name">Andrew P. Steffey</div>
-        <nav id="navbar">
+    <header id="navbar">
+        <div id="name"><a href="#welcome-section">Andrew Steffey</a></div>
+        <img src="hamburger.svg" alt="Navigation Menu" id="nav-button">
+        <nav id="nav">
             <ul>
-                <li><a href="#welcome-section">About</a></li>
-                <li><a href="#projects">Work</a></li>
+                <!--<li><a href="#welcome-section">About</a></li>-->
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Portfolio</a></li>
+                <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
     </header>
-    
+
     <section id="welcome-section">
-        <h1>apsteffey's Portfolio</h1>
+        <div id="who-i-am">
+            <h1>Andrew Steffey</h1>
+            <h3>lifelong learner, intense thinker, dilligent creator</h3>
+            <h2>Software Engineer</h2>
+        </div>
     </section>
+
+    <section id="experience">
+        <h1>Experience</h1>
+        <p id="brand">I create new and inventive solutions to complex problems through continual learning, in-depth contemplation, and diligent effort.</p>
+
+        <p>I have a strong background in complex distributed systems, disadvantaged networking, and integration of disparate systems. I am looking for new opportunities to acquire knowledge, gain new skills, experience new domains, and create inovative software solutions to solve challenging problems.</p>
+
+        <div class="work-card">
+            <div class="company"><h1>The MITRE Corporation</h1></div>
+            <div class="work-details">
+                <h2>Lead Networking and Distributed Systems Engineer</h2>
+                <p></p>
+                <ul>
+                    <li>High demand technical contributor/lead for airborne networking analysis, strategic planning, and requirements development activities. Major contributor and thought leader for Air Force strategic plans and future tactical networking concepts.</li>
+                    <li>Led five-person team to conduct modelling and simulation of end-to-end networking and quality of service performance over an emerging satellite communications system. Networking knowledge was instrumental in design. Developed siginificant portions of the C++ based model.</li>
+                    <li>Headed creation of website to track current/funded airborne networking systems across the Air Force. Worked around constraints of sponsor-imposed environment through developing a heavily customized SharePoint site with extensive use of Javascript and SharePoint's REST API.</li>
+                    <li>Utilizing the limited resources available on issolated and locked-down government networks, developed numerous tools using Microsoft Access, Excel, and VBA to conduct quick-turn network analyses.</li>
+                </ul>
+            </div>
+            <div class="timeframe">Oct 2007 - Present</div>
+            <div class="location">Hampton, VA</div>
+        </div>
+
+        <div class="work-card">
+            <div class="company"><h1>United States Air Force</h1></div>
+            <div class="work-details">
+                <h2>Network and Communications Officer</h2>
+                <p></p>
+                <ul>
+                    <li>Key player in upgrding B-2 bomber satellite communication capabilities - developed initial prototype of software to control/configure radio and led investigation of TCP/IP-based architecture adoption.</li>
+                    <li>Managed 5K+ user network; troubleshot and resolved network outages; developed automated scripts to identify and patch non-compliant software.</li>
+                    <li>Earned superior performer during major unit inspection for developing extensive enhancements to critical web-based application.</li>
+                </ul>
+            </div>
+            <div class="timeframe">Feb 2005 - Sep 2007</div>
+            <div class="location">Whiteman AFB, MO</div>
+        </div>
+    </section>
+
     <section id="projects">
+        <h1>Portfolio</h1>
         <div class="project-tile">
             <a class="project-title" href="../build-a-tribute-page/index.html">Tribute Page</a>
         </div>
-
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porttitor lacus luctus accumsan tortor posuere ac. Quam elementum pulvinar etiam non quam. Viverra vitae congue eu consequat ac felis donec et. Donec ultrices tincidunt arcu non sodales. Quam adipiscing vitae proin sagittis nisl. Sagittis eu volutpat odio facilisis mauris sit amet massa vitae. Ultrices eros in cursus turpis massa tincidunt dui ut. Leo urna molestie at elementum eu facilisis. Tortor posuere ac ut consequat. Tincidunt id aliquet risus feugiat in ante metus dictum at. Amet nulla facilisi morbi tempus iaculis urna id. Vitae turpis massa sed elementum tempus egestas sed sed risus. Orci sagittis eu volutpat odio facilisis. Dictum at tempor commodo ullamcorper a.</p>
+        <p>Amet facilisis magna etiam tempor orci eu lobortis elementum. Non tellus orci ac auctor augue. Feugiat sed lectus vestibulum mattis ullamcorper velit. Metus aliquam eleifend mi in nulla posuere. Sit amet dictum sit amet justo donec enim diam. Pellentesque nec nam aliquam sem et. Nunc mattis enim ut tellus elementum sagittis vitae et leo. Volutpat consequat mauris nunc congue nisi. Adipiscing vitae proin sagittis nisl. Faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae.</p>
+        <p>Sed id semper risus in hendrerit. Duis convallis convallis tellus id interdum velit laoreet id donec. Magnis dis parturient montes nascetur ridiculus mus. Sed turpis tincidunt id aliquet risus feugiat in. Sit amet justo donec enim. Faucibus et molestie ac feugiat sed lectus vestibulum mattis ullamcorper. Sed sed risus pretium quam. Tincidunt dui ut ornare lectus sit. Aliquam etiam erat velit scelerisque in dictum non. Est ultricies integer quis auctor elit sed vulputate. Nulla aliquet enim tortor at auctor urna nunc id. Cursus metus aliquam eleifend mi in.</p>
+        <p>Quam adipiscing vitae proin sagittis nisl rhoncus. Nisi est sit amet facilisis magna etiam tempor orci eu. Nulla pellentesque dignissim enim sit amet venenatis urna cursus. Duis ultricies lacus sed turpis tincidunt id. Pharetra sit amet aliquam id diam maecenas ultricies. Eu facilisis sed odio morbi quis. Diam maecenas ultricies mi eget mauris. Dignissim sodales ut eu sem integer vitae justo eget magna. Senectus et netus et malesuada. Cras semper auctor neque vitae tempus quam pellentesque nec nam. Malesuada fames ac turpis egestas maecenas. Lectus arcu bibendum at varius vel. Nunc sed velit dignissim sodales ut eu sem integer. Sed arcu non odio euismod lacinia at quis risus. Consequat nisl vel pretium lectus quam id leo. Et netus et malesuada fames. Senectus et netus et malesuada fames ac. Donec ultrices tincidunt arcu non sodales neque sodales.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porttitor lacus luctus accumsan tortor posuere ac. Quam elementum pulvinar etiam non quam. Viverra vitae congue eu consequat ac felis donec et. Donec ultrices tincidunt arcu non sodales. Quam adipiscing vitae proin sagittis nisl. Sagittis eu volutpat odio facilisis mauris sit amet massa vitae. Ultrices eros in cursus turpis massa tincidunt dui ut. Leo urna molestie at elementum eu facilisis. Tortor posuere ac ut consequat. Tincidunt id aliquet risus feugiat in ante metus dictum at. Amet nulla facilisi morbi tempus iaculis urna id. Vitae turpis massa sed elementum tempus egestas sed sed risus. Orci sagittis eu volutpat odio facilisis. Dictum at tempor commodo ullamcorper a.</p>
+        <p>Amet facilisis magna etiam tempor orci eu lobortis elementum. Non tellus orci ac auctor augue. Feugiat sed lectus vestibulum mattis ullamcorper velit. Metus aliquam eleifend mi in nulla posuere. Sit amet dictum sit amet justo donec enim diam. Pellentesque nec nam aliquam sem et. Nunc mattis enim ut tellus elementum sagittis vitae et leo. Volutpat consequat mauris nunc congue nisi. Adipiscing vitae proin sagittis nisl. Faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae.</p>
+        <p>Sed id semper risus in hendrerit. Duis convallis convallis tellus id interdum velit laoreet id donec. Magnis dis parturient montes nascetur ridiculus mus. Sed turpis tincidunt id aliquet risus feugiat in. Sit amet justo donec enim. Faucibus et molestie ac feugiat sed lectus vestibulum mattis ullamcorper. Sed sed risus pretium quam. Tincidunt dui ut ornare lectus sit. Aliquam etiam erat velit scelerisque in dictum non. Est ultricies integer quis auctor elit sed vulputate. Nulla aliquet enim tortor at auctor urna nunc id. Cursus metus aliquam eleifend mi in.</p>
+        <p>Quam adipiscing vitae proin sagittis nisl rhoncus. Nisi est sit amet facilisis magna etiam tempor orci eu. Nulla pellentesque dignissim enim sit amet venenatis urna cursus. Duis ultricies lacus sed turpis tincidunt id. Pharetra sit amet aliquam id diam maecenas ultricies. Eu facilisis sed odio morbi quis. Diam maecenas ultricies mi eget mauris. Dignissim sodales ut eu sem integer vitae justo eget magna. Senectus et netus et malesuada. Cras semper auctor neque vitae tempus quam pellentesque nec nam. Malesuada fames ac turpis egestas maecenas. Lectus arcu bibendum at varius vel. Nunc sed velit dignissim sodales ut eu sem integer. Sed arcu non odio euismod lacinia at quis risus. Consequat nisl vel pretium lectus quam id leo. Et netus et malesuada fames. Senectus et netus et malesuada fames ac. Donec ultrices tincidunt arcu non sodales neque sodales.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porttitor lacus luctus accumsan tortor posuere ac. Quam elementum pulvinar etiam non quam. Viverra vitae congue eu consequat ac felis donec et. Donec ultrices tincidunt arcu non sodales. Quam adipiscing vitae proin sagittis nisl. Sagittis eu volutpat odio facilisis mauris sit amet massa vitae. Ultrices eros in cursus turpis massa tincidunt dui ut. Leo urna molestie at elementum eu facilisis. Tortor posuere ac ut consequat. Tincidunt id aliquet risus feugiat in ante metus dictum at. Amet nulla facilisi morbi tempus iaculis urna id. Vitae turpis massa sed elementum tempus egestas sed sed risus. Orci sagittis eu volutpat odio facilisis. Dictum at tempor commodo ullamcorper a.</p>
+        <p>Amet facilisis magna etiam tempor orci eu lobortis elementum. Non tellus orci ac auctor augue. Feugiat sed lectus vestibulum mattis ullamcorper velit. Metus aliquam eleifend mi in nulla posuere. Sit amet dictum sit amet justo donec enim diam. Pellentesque nec nam aliquam sem et. Nunc mattis enim ut tellus elementum sagittis vitae et leo. Volutpat consequat mauris nunc congue nisi. Adipiscing vitae proin sagittis nisl. Faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae.</p>
+        <p>Sed id semper risus in hendrerit. Duis convallis convallis tellus id interdum velit laoreet id donec. Magnis dis parturient montes nascetur ridiculus mus. Sed turpis tincidunt id aliquet risus feugiat in. Sit amet justo donec enim. Faucibus et molestie ac feugiat sed lectus vestibulum mattis ullamcorper. Sed sed risus pretium quam. Tincidunt dui ut ornare lectus sit. Aliquam etiam erat velit scelerisque in dictum non. Est ultricies integer quis auctor elit sed vulputate. Nulla aliquet enim tortor at auctor urna nunc id. Cursus metus aliquam eleifend mi in.</p>
+        <p>Quam adipiscing vitae proin sagittis nisl rhoncus. Nisi est sit amet facilisis magna etiam tempor orci eu. Nulla pellentesque dignissim enim sit amet venenatis urna cursus. Duis ultricies lacus sed turpis tincidunt id. Pharetra sit amet aliquam id diam maecenas ultricies. Eu facilisis sed odio morbi quis. Diam maecenas ultricies mi eget mauris. Dignissim sodales ut eu sem integer vitae justo eget magna. Senectus et netus et malesuada. Cras semper auctor neque vitae tempus quam pellentesque nec nam. Malesuada fames ac turpis egestas maecenas. Lectus arcu bibendum at varius vel. Nunc sed velit dignissim sodales ut eu sem integer. Sed arcu non odio euismod lacinia at quis risus. Consequat nisl vel pretium lectus quam id leo. Et netus et malesuada fames. Senectus et netus et malesuada fames ac. Donec ultrices tincidunt arcu non sodales neque sodales.</p>
     </section>
+
+    <section id="skills">
+        <h1>Skills</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porttitor lacus luctus accumsan tortor posuere ac. Quam elementum pulvinar etiam non quam. Viverra vitae congue eu consequat ac felis donec et. Donec ultrices tincidunt arcu non sodales. Quam adipiscing vitae proin sagittis nisl. Sagittis eu volutpat odio facilisis mauris sit amet massa vitae. Ultrices eros in cursus turpis massa tincidunt dui ut. Leo urna molestie at elementum eu facilisis. Tortor posuere ac ut consequat. Tincidunt id aliquet risus feugiat in ante metus dictum at. Amet nulla facilisi morbi tempus iaculis urna id. Vitae turpis massa sed elementum tempus egestas sed sed risus. Orci sagittis eu volutpat odio facilisis. Dictum at tempor commodo ullamcorper a.</p>
+        <p>Amet facilisis magna etiam tempor orci eu lobortis elementum. Non tellus orci ac auctor augue. Feugiat sed lectus vestibulum mattis ullamcorper velit. Metus aliquam eleifend mi in nulla posuere. Sit amet dictum sit amet justo donec enim diam. Pellentesque nec nam aliquam sem et. Nunc mattis enim ut tellus elementum sagittis vitae et leo. Volutpat consequat mauris nunc congue nisi. Adipiscing vitae proin sagittis nisl. Faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae.</p>
+        <p>Sed id semper risus in hendrerit. Duis convallis convallis tellus id interdum velit laoreet id donec. Magnis dis parturient montes nascetur ridiculus mus. Sed turpis tincidunt id aliquet risus feugiat in. Sit amet justo donec enim. Faucibus et molestie ac feugiat sed lectus vestibulum mattis ullamcorper. Sed sed risus pretium quam. Tincidunt dui ut ornare lectus sit. Aliquam etiam erat velit scelerisque in dictum non. Est ultricies integer quis auctor elit sed vulputate. Nulla aliquet enim tortor at auctor urna nunc id. Cursus metus aliquam eleifend mi in.</p>
+        <p>Quam adipiscing vitae proin sagittis nisl rhoncus. Nisi est sit amet facilisis magna etiam tempor orci eu. Nulla pellentesque dignissim enim sit amet venenatis urna cursus. Duis ultricies lacus sed turpis tincidunt id. Pharetra sit amet aliquam id diam maecenas ultricies. Eu facilisis sed odio morbi quis. Diam maecenas ultricies mi eget mauris. Dignissim sodales ut eu sem integer vitae justo eget magna. Senectus et netus et malesuada. Cras semper auctor neque vitae tempus quam pellentesque nec nam. Malesuada fames ac turpis egestas maecenas. Lectus arcu bibendum at varius vel. Nunc sed velit dignissim sodales ut eu sem integer. Sed arcu non odio euismod lacinia at quis risus. Consequat nisl vel pretium lectus quam id leo. Et netus et malesuada fames. Senectus et netus et malesuada fames ac. Donec ultrices tincidunt arcu non sodales neque sodales.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porttitor lacus luctus accumsan tortor posuere ac. Quam elementum pulvinar etiam non quam. Viverra vitae congue eu consequat ac felis donec et. Donec ultrices tincidunt arcu non sodales. Quam adipiscing vitae proin sagittis nisl. Sagittis eu volutpat odio facilisis mauris sit amet massa vitae. Ultrices eros in cursus turpis massa tincidunt dui ut. Leo urna molestie at elementum eu facilisis. Tortor posuere ac ut consequat. Tincidunt id aliquet risus feugiat in ante metus dictum at. Amet nulla facilisi morbi tempus iaculis urna id. Vitae turpis massa sed elementum tempus egestas sed sed risus. Orci sagittis eu volutpat odio facilisis. Dictum at tempor commodo ullamcorper a.</p>
+        <p>Amet facilisis magna etiam tempor orci eu lobortis elementum. Non tellus orci ac auctor augue. Feugiat sed lectus vestibulum mattis ullamcorper velit. Metus aliquam eleifend mi in nulla posuere. Sit amet dictum sit amet justo donec enim diam. Pellentesque nec nam aliquam sem et. Nunc mattis enim ut tellus elementum sagittis vitae et leo. Volutpat consequat mauris nunc congue nisi. Adipiscing vitae proin sagittis nisl. Faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae.</p>
+        <p>Sed id semper risus in hendrerit. Duis convallis convallis tellus id interdum velit laoreet id donec. Magnis dis parturient montes nascetur ridiculus mus. Sed turpis tincidunt id aliquet risus feugiat in. Sit amet justo donec enim. Faucibus et molestie ac feugiat sed lectus vestibulum mattis ullamcorper. Sed sed risus pretium quam. Tincidunt dui ut ornare lectus sit. Aliquam etiam erat velit scelerisque in dictum non. Est ultricies integer quis auctor elit sed vulputate. Nulla aliquet enim tortor at auctor urna nunc id. Cursus metus aliquam eleifend mi in.</p>
+        <p>Quam adipiscing vitae proin sagittis nisl rhoncus. Nisi est sit amet facilisis magna etiam tempor orci eu. Nulla pellentesque dignissim enim sit amet venenatis urna cursus. Duis ultricies lacus sed turpis tincidunt id. Pharetra sit amet aliquam id diam maecenas ultricies. Eu facilisis sed odio morbi quis. Diam maecenas ultricies mi eget mauris. Dignissim sodales ut eu sem integer vitae justo eget magna. Senectus et netus et malesuada. Cras semper auctor neque vitae tempus quam pellentesque nec nam. Malesuada fames ac turpis egestas maecenas. Lectus arcu bibendum at varius vel. Nunc sed velit dignissim sodales ut eu sem integer. Sed arcu non odio euismod lacinia at quis risus. Consequat nisl vel pretium lectus quam id leo. Et netus et malesuada fames. Senectus et netus et malesuada fames ac. Donec ultrices tincidunt arcu non sodales neque sodales.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porttitor lacus luctus accumsan tortor posuere ac. Quam elementum pulvinar etiam non quam. Viverra vitae congue eu consequat ac felis donec et. Donec ultrices tincidunt arcu non sodales. Quam adipiscing vitae proin sagittis nisl. Sagittis eu volutpat odio facilisis mauris sit amet massa vitae. Ultrices eros in cursus turpis massa tincidunt dui ut. Leo urna molestie at elementum eu facilisis. Tortor posuere ac ut consequat. Tincidunt id aliquet risus feugiat in ante metus dictum at. Amet nulla facilisi morbi tempus iaculis urna id. Vitae turpis massa sed elementum tempus egestas sed sed risus. Orci sagittis eu volutpat odio facilisis. Dictum at tempor commodo ullamcorper a.</p>
+        <p>Amet facilisis magna etiam tempor orci eu lobortis elementum. Non tellus orci ac auctor augue. Feugiat sed lectus vestibulum mattis ullamcorper velit. Metus aliquam eleifend mi in nulla posuere. Sit amet dictum sit amet justo donec enim diam. Pellentesque nec nam aliquam sem et. Nunc mattis enim ut tellus elementum sagittis vitae et leo. Volutpat consequat mauris nunc congue nisi. Adipiscing vitae proin sagittis nisl. Faucibus pulvinar elementum integer enim neque volutpat ac tincidunt vitae.</p>
+        <p>Sed id semper risus in hendrerit. Duis convallis convallis tellus id interdum velit laoreet id donec. Magnis dis parturient montes nascetur ridiculus mus. Sed turpis tincidunt id aliquet risus feugiat in. Sit amet justo donec enim. Faucibus et molestie ac feugiat sed lectus vestibulum mattis ullamcorper. Sed sed risus pretium quam. Tincidunt dui ut ornare lectus sit. Aliquam etiam erat velit scelerisque in dictum non. Est ultricies integer quis auctor elit sed vulputate. Nulla aliquet enim tortor at auctor urna nunc id. Cursus metus aliquam eleifend mi in.</p>
+        <p>Quam adipiscing vitae proin sagittis nisl rhoncus. Nisi est sit amet facilisis magna etiam tempor orci eu. Nulla pellentesque dignissim enim sit amet venenatis urna cursus. Duis ultricies lacus sed turpis tincidunt id. Pharetra sit amet aliquam id diam maecenas ultricies. Eu facilisis sed odio morbi quis. Diam maecenas ultricies mi eget mauris. Dignissim sodales ut eu sem integer vitae justo eget magna. Senectus et netus et malesuada. Cras semper auctor neque vitae tempus quam pellentesque nec nam. Malesuada fames ac turpis egestas maecenas. Lectus arcu bibendum at varius vel. Nunc sed velit dignissim sodales ut eu sem integer. Sed arcu non odio euismod lacinia at quis risus. Consequat nisl vel pretium lectus quam id leo. Et netus et malesuada fames. Senectus et netus et malesuada fames ac. Donec ultrices tincidunt arcu non sodales neque sodales.</p>
+    </section>
+
     <section id="contact">
         <h1>Contact Me</h1>
-        <a href="https://github.com/apsteffey" class="contact-link" id="profile-link" target="_blank">GitHub</a>
-
-
+        <a href="https://github.com/asteffey" class="contact-link" id="profile-link" target="_blank">GitHub</a>
     </section>
 </body>
 </html>
