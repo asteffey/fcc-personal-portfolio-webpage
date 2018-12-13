@@ -162,6 +162,42 @@
             visibility: visible !important;
         }
 
+        #brand {
+            font-style: italic;
+            text-align: center;
+            font-weight: 600;
+            margin: 0 auto;
+            padding: 0 20px;
+            max-width: 600px;
+
+        }
+
+        #skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            /* border: 1px solid black; */
+        }
+        
+        .skill {
+            width: 100px;
+            height: 120px;
+            text-align: center;
+            /* border: 1px solid black; */
+            box-sizing: border-box;
+            display: grid;
+            grid-template-rows: 80px auto;
+            justify-items: center;
+            align-items: center;
+
+        }
+        .skill > img {
+            max-width: 80px;
+            max-height: 80px;
+        }
+
         @media (min-width: 550px) {
             #nav-button {
                 display: none;
@@ -193,15 +229,7 @@
             }
         }
 
-        #brand {
-            font-style: italic;
-            text-align: center;
-            font-weight: 600;
-            margin: 0 auto;
-            padding: 0 20px;
-            max-width: 600px;
 
-        }
 
     </style>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -254,7 +282,7 @@
     <script src="../testable-projects-fcc-v1-bundle.js"></script>
     <header id="navbar">
         <div id="name"><a href="#welcome-section">Andrew Steffey</a></div>
-        <img src="hamburger.svg" alt="Navigation Menu" id="nav-button">
+        <img src="images/hamburger.svg" alt="Navigation Menu" id="nav-button">
         <nav id="nav">
             <ul>
                 <li><a href="#welcome-section">Home</a></li>
@@ -283,10 +311,61 @@
             software which makes a positive impact on the world.</p>
         <h2>Skills</h2>
         <!--Criteria: for every technology listed, I need a project in my portfolio which uses it.-->
-        <p>HTML, CSS3, JavaScript, React, JQuery</p>
-        <!--<p>XML, XSLT, JSON, gRPC, Protocol Buffers, TCP/IP</p>-->
-        <p>Node.js, Python, C++</p>
-        <p>Docker, MySQL, MongoDB, Travis CI</p>
+        <div id="skills">
+            <div class="skill">
+                <img src="images/devicon/html5-original.svg" alt="HTML5">
+                HTML5
+            </div>
+            <div class="skill">
+                <img src="images/devicon/css3-original.svg" alt="CSS3">
+                CSS3
+            </div>
+            <div class="skill">
+                <img src="images/devicon/javascript-original.svg" alt="JavaScript">
+                JavaScript
+            </div>
+            <!-- <div class="skill">
+                <img src="images/devicon/react-original.svg" alt="React">
+                React
+            </div> -->
+            <div class="skill">
+                <img src="images/devicon/jquery-original.svg" alt="JQuery">
+                JQuery
+            </div>
+            <div class="skill">
+                <img src="images/devicon/nodejs-original.svg" alt="Node.js">
+                Node.js
+            </div>
+            <div class="skill">
+                <img src="images/devicon/python-original.svg" alt="Python">
+                Python
+            </div>
+            <div class="skill">
+                <img src="images/devicon/cplusplus-original.svg" alt="C++">
+                C++
+            </div>
+            <div class="skill">
+                <img src="images/devicon/grpc.svg" alt="gRPC">
+                gRPC
+            </div>
+            <!-- <div class="skill">
+                <img src="images/devicon/docker-original.svg" alt="Docker">
+                Docker
+            </div> -->
+            <div class="skill">
+                <img src="images/devicon/mysql-original.svg" alt="MySQL">
+                MySQL
+            </div>
+            <!-- <div class="skill">
+                <img src="images/devicon/mongodb-original.svg" alt="HTML5">
+                MongoDB
+            </div> -->
+            <!-- <div class="skill">
+                <img src="images/devicon/travis-plain.svg" alt="Travis CI">
+                Travis CI
+            </div> -->
+            
+        </div>
     </section>
 
     <section id="projects">
