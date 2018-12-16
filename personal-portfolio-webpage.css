@@ -4,6 +4,7 @@
     --top-header-height: 50px;
     --top-padding: calc(var(--top-header-height) + 10px);
     --top-name-width: 200px;
+    --default-width: 1000px;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -30,13 +31,15 @@ main {
 }
 
 main>section {
-    padding-bottom: 16px;
+    padding-bottom: 50px;
+    min-height: 100vh;
+    box-sizing: border-box;
 }
 
 p {
     text-align: justify;
     margin: 16px auto;
-    max-width: 1000px;
+    max-width: var(--default-width);
 }
 
 h1 {
@@ -77,6 +80,7 @@ main>section>h1:first-child {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 0;
 }
 
 #welcome-section {
@@ -172,21 +176,28 @@ nav a {
     visibility: visible !important;
 }
 
+img#self-photo {
+    border-radius: 40%;
+    box-shadow: 0px 4px 6px 2px #d3d3d3;
+    display: block;
+    margin: 40px auto;
+}
+
 #brand {
     font-style: italic;
+    font-size: 1.2em;
     text-align: center;
     font-weight: 600;
     margin: 0 auto;
     padding: 0 20px;
-    max-width: 600px;
-
+    max-width: calc(var(--default-width) * 0.8);
 }
 
 #skills {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    max-width: 1000px;
+    max-width: var(--default-width);
     margin: 0 auto;
     /* border: 1px solid black; */
 }
@@ -202,6 +213,8 @@ div.skill,
     grid-template-rows: 80px auto;
     justify-items: center;
     align-items: center;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
 }
 
 div.skill>img,
