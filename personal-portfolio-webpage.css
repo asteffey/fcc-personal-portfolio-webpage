@@ -84,8 +84,21 @@ main>section>h1:first-child {
 }
 
 #welcome-section {
+    background-color: #ccd;
+}
+
+#about-me {
     background-color: #eef;
 }
+
+#projects {
+    background-color: #bbc;
+}
+
+#contact {
+    background-color: #889;
+}
+
 
 #intro {
     height: 200px;
@@ -182,6 +195,8 @@ img#self-photo {
     display: block;
     margin: 40px auto;
 }
+
+
 
 #brand {
     font-style: italic;
