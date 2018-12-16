@@ -266,10 +266,12 @@ div.skill>img,
 #profiles a {
     text-decoration: none;
     margin: 0 20px;
+    color: black;
 }
 
 #profiles a:hover {
     font-weight: bolder;
+    color: #e31b3c;
 }
 
 #projects {
