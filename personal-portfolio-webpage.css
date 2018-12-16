@@ -3,7 +3,7 @@
 :root {
     --top-header-height: 50px;
     --top-padding: calc(var(--top-header-height) + 10px);
-    --top-name-width: 200px;
+    --top-name-width: 150px;
     --default-width: 1000px;
     font-family: 'Montserrat', sans-serif;
 }
