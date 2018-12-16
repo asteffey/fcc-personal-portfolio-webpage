@@ -74,7 +74,7 @@ main>section>h1:first-child {
 }
 
 #welcome-section,
-#contact {
+#contact-section {
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -87,15 +87,15 @@ main>section>h1:first-child {
     background-color: #ccd;
 }
 
-#about-me {
+#about-section {
     background-color: #eef;
 }
 
-#projects {
+#projects-section {
     background-color: #bbc;
 }
 
-#contact {
+#contact-section {
     background-color: #889;
 }
 
@@ -137,6 +137,7 @@ main>section>h1:first-child {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 100;
     height: var(--top-header-height);
     width: 100%;
     background-color: #333;
@@ -155,6 +156,7 @@ main>section>h1:first-child {
     position: fixed;
     top: var(--top-header-height);
     left: 0;
+    z-index: 100;
     width: 100%;
     background-color: #393939;
     visibility: hidden;
@@ -170,7 +172,7 @@ nav a {
 
 #nav a:hover,
 #nav a.active {
-    color: rgb(227, 27, 60);
+    color: #e31b3c;
 }
 
 #navbar nav ul,
@@ -269,6 +271,115 @@ div.skill>img,
 #profiles a:hover {
     font-weight: bolder;
 }
+
+#projects {
+    max-width: 1230px;
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.project-tile {
+    display: block;
+    width: 400px;
+    height: 300px;
+    margin: 3px;
+    padding: 0;
+    position: relative;
+    border: 2px ridge rgb(0,0,0,0.3);
+    /* box-shadow: 2px 2px 6px 2px rgb(0, 0, 0, 0.4); */
+}
+
+.project-picture {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 400px;
+    height: 300px;
+    margin: 0;
+    padding: 0;
+    visibility: visible;
+    opacity: 1;
+}
+
+.project-tile:hover > .project-picture {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s, opacity 0.3s linear;
+}
+
+
+.project-info {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: #eee;
+    width: 400px;
+    height: 300px;
+    margin: 0;
+    padding: 20px 20px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    /* justify-content: flex-end; */
+}
+
+
+.project-info h3 {
+    margin: 5px;
+    font-size: 1.5em;
+} 
+
+.project-info h4 {
+    margin: 5px;
+    font-style: oblique;
+    color: #223;
+} 
+
+.project-info p {
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+
+.project-links {
+    position: absolute;
+    bottom: 15px;
+    height: 30px;
+    line-height: 30px;
+    display: flex;
+}
+
+.project-links a {
+    display: flex;
+    text-decoration: none;
+    margin-right: 20px;
+    border-radius: 5px;
+    color: black;
+    font-weight: 700;
+}
+
+.project-links a:hover {
+    color: #e31b3c;
+}
+
+.project-links a:hover img {
+    /* thanks to https://codepen.io/sosuke/pen/Pjoqqp */
+    filter: invert(20%) sepia(89%) saturate(3056%) hue-rotate(338deg) brightness(89%) contrast(100%);
+}
+
+
+.project-links img {
+    height: 30px;
+    width: 30px;
+    margin-right: 6px;
+}
+
+
 
 @media (min-width: 550px) {
     #nav-button {
