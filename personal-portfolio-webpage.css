@@ -129,7 +129,7 @@ main>section>h1:first-child {
 }
 
 #navbar,
-#navbar nav {
+#nav {
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
@@ -159,12 +159,14 @@ main>section>h1:first-child {
     z-index: 100;
     width: 100%;
     background-color: #393939;
-    visibility: hidden;
+    /* visibility: hidden; */
+    height: 0;
+    overflow: hidden;
     padding-bottom: 5px;
     font-family: 'Open Sans', sans-serif;
 }
 
-nav a {
+#nav a {
     font-size: 12pt;
     color: white;
     text-decoration: none;
@@ -187,8 +189,13 @@ nav a {
     padding: 8px 20px 8px 20px;
 }
 
+#nav {
+    transition: height 0.4s cubic-bezier(0, 1, 0.5, 1);
+}
+
 .nav-visible {
-    visibility: visible !important;
+    height: 152px !important;
+    /* visibility: visible !important; */
 }
 
 img#self-photo {
@@ -340,7 +347,8 @@ div.skill>img,
 .project-info h4 {
     margin: 5px;
     font-style: oblique;
-    color: #223;
+    color: #334;
+    font-weight: 500;
 }
 
 .project-info p {
