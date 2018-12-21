@@ -364,13 +364,13 @@ div.skill>img,
     padding: 0;
     visibility: visible;
     opacity: 1;
+    transition: visibility 0.3s, opacity 0.3s linear;
 }
 
 .project-tile:hover>.project-picture,
 .project-tile:active>.project-picture {
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0.3s, opacity 0.3s linear;
 }
 
 
