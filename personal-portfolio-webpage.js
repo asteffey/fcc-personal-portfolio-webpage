@@ -24,18 +24,26 @@ function on_resize() {
 }
 
 function on_scroll() {
-    var currentPos = $(window).scrollTop();
+
+
+    let currentPos = $(window).scrollTop();
+    
+    // curBottom and prevBottom are scroll positions of bottom of section divs
+    // Subtract positions by -1 to provide buffer when currentPos is actually 
+    // a fraction of a pixel into previous section due to rounding errors
+   
+    let prevBottom = -1;
     $('#nav a').each(function () {
         var sectionLink = $(this);
         // capture the height of the navbar
         var section = $(sectionLink.attr('href'));
 
-        // subtract the navbar height from the top of the section
-        if (Math.round(section.offset().top) <= currentPos && currentPos < Math.round(section.offset().top + section.outerHeight())) {
-            //$('.nav li').removeClass('active');
+        var curBottom = (section.offset().top + section.outerHeight() - 1);
+        if (prevBottom < currentPos && currentPos < curBottom) {
             sectionLink.addClass('active');
         } else {
             sectionLink.removeClass('active');
         }
+        prevBottom = curBottom;
     });
 }
