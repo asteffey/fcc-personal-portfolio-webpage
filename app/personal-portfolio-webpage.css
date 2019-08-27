@@ -57,6 +57,13 @@ h5 {
     --top-header-height: 50px;
     --top-padding: calc(var(--top-header-height) + 10px);
     --top-name-width: 150px;
+    --top-name-width-fcc-test: 80vw;
+}
+
+@media (min-width: 250px) {
+    :root {
+        --top-name-width-fcc-test: 200px;
+    }
 }
 
 #name {
@@ -66,6 +73,10 @@ h5 {
     padding-right: 25px;
     box-sizing: border-box;
     font-family: 'Lato', sans-serif;
+}
+
+#name.with-fcc-test {
+    width: var(--top-name-width-fcc-test);
 }
 
 #name a {
@@ -89,6 +100,10 @@ h5 {
     color: #EEF;
     display: grid;
     grid-template-columns: var(--top-name-width) auto;
+}
+
+#navbar.with-fcc-test {
+    height: var(--top-header-height-fcc-test);
 }
 
 #nav-button {

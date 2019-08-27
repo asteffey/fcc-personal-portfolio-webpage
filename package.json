@@ -1,0 +1,26 @@
+{
+  "name": "build-a-personal-portfolio-webpage",
+  "version": "1.0.0",
+  "repository": "https://github.com/asteffey/freecodecamp/tree/master/responsive-web-design/build-a-personal-portfolio-webpage",
+  "author": "Andrew Steffey",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-cache": "^1.1.3",
+    "gulp-imagemin": "^6.1.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-minify-html": "^1.0.6",
+    "gulp-terser": "^1.2.0"
+  },
+  "scripts": {
+    "clean": "gulp clean",
+    "build": "gulp build",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -a -d dist -e build-a-personal-portfolio-webpage"
+  }
+}
