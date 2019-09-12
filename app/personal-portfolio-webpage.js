@@ -3,10 +3,6 @@ $(function () {
     if (searchParams.get('fcc-test') === 'true') {
         $("#name").addClass("with-fcc-test");
         $("#navbar").addClass("with-fcc-test");
-        console.log('fcc-test here');
-    }
-    else {
-        console.log('fcc-test NOT HERE');
     }
 
     on_resize();
