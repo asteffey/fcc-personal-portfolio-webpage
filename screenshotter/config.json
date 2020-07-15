@@ -1,26 +1,26 @@
 {
-    "path": "../images/screenshots/",
-    "thumbnail_path": "../images/screenshots/thumbnails/",
+    "path": "../app/images/screenshots/",
+    "thumbnail_path": "../app/images/screenshots/thumbnails/",
     "sites": [{
-            "url": "https://asteffey.github.io/freecodecamp/responsive-web-design/build-a-tribute-page/index.html",
+            "url": "https://asteffey.github.io/freecodecamp/build-a-tribute-page/index.html",
             "width": 1000,
             "height": 750,
             "out": "build-a-tribute-page.png"
         },
         {
-            "url": "https://asteffey.github.io/freecodecamp/responsive-web-design/build-a-survey-form/index.html",
+            "url": "https://asteffey.github.io/freecodecamp/build-a-survey-form/index.html",
             "width": 1000,
             "height": 750,
             "out": "build-a-survey-form.png"
         },
         {
-            "url": "https://asteffey.github.io/freecodecamp/responsive-web-design/build-a-technical-documentation-page/index.html",
+            "url": "https://asteffey.github.io/freecodecamp/build-a-technical-documentation-page/index.html",
             "width": 1000,
             "height": 750,
             "out": "build-a-technical-documentation-page.png"
         },
         {
-            "url": "https://asteffey.github.io/freecodecamp/responsive-web-design/build-a-product-landing-page/index.html",
+            "url": "https://asteffey.github.io/freecodecamp/build-a-product-landing-page/index.html",
             "width": 1000,
             "height": 750,
             "out": "build-a-product-landing-page.png"
