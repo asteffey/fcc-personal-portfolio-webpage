@@ -1,7 +1,7 @@
 {
-  "name": "build-a-personal-portfolio-webpage",
+  "name": "fcc-personal-portfolio-webpage",
   "version": "1.0.0",
-  "repository": "https://github.com/asteffey/freecodecamp/tree/master/responsive-web-design/build-a-personal-portfolio-webpage",
+  "repository": "https://github.com/asteffey/fcc-personal-portfolio-webpage",
   "author": "Andrew Steffey",
   "license": "MIT",
   "private": true,
